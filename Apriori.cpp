@@ -281,7 +281,7 @@ vector<int> items;
 void fileinput(){
     clr(mark);
     string S, t;
-    ifstream myfile("mushroom.txt");
+    ifstream myfile("chess.txt");
 
     trans= 0;
     int it;
@@ -306,7 +306,7 @@ void fileinput(){
             if(!mark[a]){
                 mark[a]= 1;
                 items.pb(a);
-            }
+           }
             support_cnt[a]++;
         }
     }
@@ -319,6 +319,8 @@ void fileinput(){
 
     float ms= (float) trans*(threshold/100.0);
     min_support= (int) ms+1;
+
+    printf("Minimum support count: %d\n",min_support);
 
     fr(items.size()){
         if(support_cnt[items[i] ] <min_support) continue;
@@ -337,6 +339,8 @@ main(){
     si(threshold);
 
     fileinput();
+
+    clock_t tStart = clock();
 
     total= pruned_candies[1].size();
 
@@ -372,7 +376,9 @@ main(){
         if(pruned_candies[k].empty())  break;
     }
 
-    outi(total);
+    printf("Total Frequent Patterns: %d\n",total);
+    printf("Time taken: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
+
     puts("Done");
 }
 
